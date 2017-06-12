@@ -167,7 +167,7 @@ function sb_plugin_init(){
 
 		/* Enregistrement de la feuille de style principale du plugin */
 		function sb_register_assets () {
-			wp_register_style('sb-global', plugin_dir_path( __FILE__ ) . 'css/sb-global.css', array(), 1.0 );
+			wp_register_style('sb-global', plugin_dir_url( __FILE__ ) . 'css/sb-global.css', array(), 1.0 );
 			wp_enqueue_style( 'sb-global' );
 		}
 		add_action('init', 'sb_register_assets');
@@ -181,7 +181,7 @@ function sb_plugin_init(){
 
 		/* Enregistrement du plugin pour le bouton */
 		function sb_add_plugin( $plugin_array ) {
-			$plugin_array['sliderbutton'] = plugin_dir_path( __FILE__ ) . 'js/sliderbutton.js';	
+			$plugin_array['sliderbutton'] = plugin_dir_url( __FILE__ ) . 'js/sliderbutton.js';	
 			return $plugin_array;
 		}
 
@@ -214,7 +214,8 @@ function sb_plugin_init(){
 			wp_register_script('slick', '//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js', array('jquery'), '1.6.0',true);
 			wp_enqueue_script('slick');
 			/* Script du plugin */
-			wp_enqueue_script( 'sb-main', plugin_dir_path( __FILE__ ) . '/js/main.js', array(), '20151215', true );
+			wp_register_script( 'sb-main', plugin_dir_url( __FILE__ ) . 'js/main.js', array(), '20151215', true );
+			wp_enqueue_script( 'sb-main');
 		}
 		add_action('wp_enqueue_scripts', 'sb_scripts');
 
