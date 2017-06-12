@@ -1,0 +1,147 @@
+/* Variables */
+$navHeight: 40px;
+$sectionHeight: 600px;
+
+//-- Couleurs
+$theme-color: darkslategrey;
+$aside-bgcolor: #eee;
+$slider-bgcolor: #222;
+
+/* Mixins */
+@mixin navigation {
+	nav {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: $navHeight;
+
+		a {
+			padding: 10px;
+			text-decoration: none;
+			color: $slider-bgcolor;
+
+			&:hover {
+				border-top: 2px solid $slider-bgcolor;
+			}
+
+			&.active {
+				border-top: 2px solid $theme-color;
+				color: $theme-color;
+				font-weight: 300;
+			}
+
+			p {
+				margin: 0;
+			}
+		}
+	}
+}
+@mixin generalStyles {
+	border: 1px solid $aside-bgcolor;
+	display: flex;
+	flex-direction: column;
+}
+
+.hidden {
+	display: none;
+}
+
+section.survol {
+	height: $sectionHeight;
+	@include generalStyles;
+	@include navigation;
+
+	.slides {
+		width: 100%;
+		height: 100%;
+		background-color: $slider-bgcolor;
+		position: relative;
+		&:hover figure:nth-child(2){
+			display: block;
+			z-index: 2;
+		}
+
+		figure {
+			height: 100%;
+			width: 100%;
+			margin: 0;
+			position: absolute;
+			top: 0px;
+			left: 0px;
+
+			img {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				max-width: 100%;
+				height: auto;
+				max-height: calc(#{$sectionHeight} - #{$navHeight}*4);
+			}
+
+		&[data-img="source"] {
+			color: $aside-bgcolor;
+
+			figcaption {
+				position: absolute;
+				bottom: 0;
+				left: 50%;
+				transform: translate(-50%, -50%);		
+			}
+
+		}
+
+		}
+	}
+	/* Styles des articles suivant la section de survol */
+	&+article {
+		display: flex;
+		flex-direction: column;
+		ul {
+			display: flex;
+			flex-direction: column-reverse; // affichage des dernières légendes activées en premier
+			order: -1; // affichage de la liste dynamique avant le contenu
+			background-color: $aside-bgcolor;
+			list-style-type: square;
+			margin-left: 0;
+
+			li {
+				padding: 10px;
+			}
+		}
+	}
+}
+
+section.slider {
+	max-height: $sectionHeight;
+	@include generalStyles;
+	@include navigation;
+	.slides {
+		width: 100%;
+		height: 100%;
+		background-color: $slider-bgcolor;
+
+		figure {
+			margin-top: 20px;
+			padding-top: 20px;
+			width: 100%;
+			height: 100%;
+			text-align: center;
+			img {
+				margin: 0 auto;
+				max-height: calc(#{$sectionHeight} - #{$navHeight}*4);
+			}
+			figcaption {
+				color: $aside-bgcolor;
+				text-align: center;
+				padding: 20px;
+				margin-bottom: -4px;
+				a {
+					text-decoration: none;
+					color: $aside-bgcolor;
+				}
+			}
+		}
+	}
+
+}
