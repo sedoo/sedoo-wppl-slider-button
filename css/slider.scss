@@ -73,7 +73,8 @@ section.survol {
 				position: absolute;
 				top: 50%;
 				left: 50%;
-				border : none;
+				border : 0 none;
+				padding: 0;
 				transform: translate(-50%, -50%);
 				max-width: 100%;
 				height: auto;
@@ -88,7 +89,8 @@ section.survol {
 				bottom: 0;
 				left: 50%;
 				transform: translate(-50%, -50%);
-				background-color: $slider-bgcolor;		
+				background-color: $slider-bgcolor;
+				color: $aside-bgcolor;		
 			}
 
 		}
@@ -132,10 +134,12 @@ section.slider {
 			text-align: center;
 			img {
 				margin: 0 auto;
-				border : none;
+				padding: 0;
+				border : 0 none;
 				max-height: calc(#{$sectionHeight} - #{$navHeight}*4);
 			}
 			figcaption {
+				background-color: $slider-bgcolor;
 				color: $aside-bgcolor;
 				text-align: center;
 				padding: 20px;
