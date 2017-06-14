@@ -43,9 +43,10 @@
 			e.preventDefault(); 
 			$(this).toggleClass('active'); 
 			// on fait apparaître ou disparaître l'image qui possède la même valeur d'attribut data-img que le lien cliqué
-			$(this).parent().next().children('[data-img="'+dataImg+'"]').css("z-index","1").toggleClass('hidden');
+			$(this).parent().next().children('[data-img="'+dataImg+'"]').css("z-index","1").toggleClass('hidden-content');
 
 			var listElement = document.createElement('li');
+			listElement.setAttribute('data-caption', dataImg);
 			
 			if ( $(this).hasClass('active') ) {
 				for (var i = 0 ; i < captions.length ; i++) {					
@@ -54,6 +55,8 @@
 
 				}
 			} else {
+				$(this).parents('.survol').siblings('article').children('.legendes').children('[data-caption="'+dataImg+'"]').remove();
+				// console.log($(this).parents('.survol').siblings('article').children('.legendes').children('[data-caption="'+dataImg+'"]'));
 				for (var i = 0 ; i < captions.length ; i++) {	
 
 					if ( dataImg === captions[i].key ) {
@@ -61,7 +64,8 @@
 						var regex = /(<([^>]+)>)/ig
 						var contentWithTags = captions[i].value;
 						var content = contentWithTags.replace(regex, "");
-						$(this).parents('section.survol').next('article').children('.legendes').children('li').remove(":contains('"+content+"')");
+						console.log(captions[i].key);
+						// $(this).parents('section.survol').next('article').children('.legendes').children('li').remove(":contains('"+content+"')");
 					}
 				}
 			}
@@ -111,7 +115,7 @@
 		autoplay: true,
 		autoplaySpeed: 3000, 
 		infinite: true, 
-		pauseOnFocus: false
+		pauseOnFocus: true
 	});
 	
 	// pour chaque lien du nav
@@ -165,7 +169,7 @@
 			    	autoplay: true,
 			  		autoplaySpeed: 3000, 
 					infinite: true, 
-					pauseOnFocus: false
+					pauseOnFocus: true
 				});
 			}
 
