@@ -56,45 +56,9 @@
 				}
 			} else {
 				$(this).parents('.survol').siblings('article').children('.legendes').children('[data-caption="'+dataImg+'"]').remove();
-				// console.log($(this).parents('.survol').siblings('article').children('.legendes').children('[data-caption="'+dataImg+'"]'));
-				for (var i = 0 ; i < captions.length ; i++) {	
-
-					if ( dataImg === captions[i].key ) {
-						/* on enlève les balises pour pouvoir comparer les chaines et enlever la bonne */
-						var regex = /(<([^>]+)>)/ig
-						var contentWithTags = captions[i].value;
-						var content = contentWithTags.replace(regex, "");
-						console.log(captions[i].key);
-						// $(this).parents('section.survol').next('article').children('.legendes').children('li').remove(":contains('"+content+"')");
-					}
-				}
 			}
 		});
 	}); 
-	
-	/**
-	 * @todo Gestion du hover : affichage de la légende on hover?
-	 */
-	 // $('.survol nav a:first-of-type').each(function() {
-	 // 	// on stocke la valeur de l'attribut data-img de chaque lien
-	 // 	var dataImg = $(this).attr('data-img'); 
-	 // 	var caption = $(this).parents('section.survol').children('.slides').children('figure[data-img="'+dataImg+'"]').children('figcaption').html();
-
-	 // 	var listElement = document.createElement('li');
-
- 	// 	if ( ! $(this).parent().prev().children('a[data-img="'+dataImg+'"]:visible') ) {
-		 	
-		//  	$(this).parent().next().children('[data-img="'+dataImg+'"]').hover( function() {
-
-		//  		listElement.innerHTML = '<strong>' + $(this).parent().prev().children('a[data-img="'+dataImg+'"]').html() + '</strong> : ' + caption;
-		// 		$(this).parents('section.survol').next('article').children('.legendes').append(listElement);
-
-		//  		},function() {
-		//  			$(this).parents('section.survol').next('article').children('.legendes').children('li').remove(":contains('"+caption+"')");
-	 // 			}
-	 // 		);
-	 // 	}
-	 // });
 	/** --- Fin Mode Survol */
 
 
