@@ -3,7 +3,7 @@
 * Plugin Name: Slider Button
 * Description: Plugin permettant l'ajout d'un slider dans le contenu d'un post ou d'une page via un shortcode
 * Author: Esteban
-* Version: 1.0.2
+* Version: 1.1.0
 * GitHub Plugin URI: sedoo/sedoo-wppl-slider-button
 * GitHub Branch:     master
 */
@@ -130,7 +130,7 @@ function sb_plugin_init(){
 				if ($choix == "survol") :
 					$source = get_field($source, $id);
 					$legende = get_field($caption, $id);
-					$return_string .= '<figure data-img="source" id="source"><img src="'.$source['url'].'" alt="source" >';
+					$return_string .= '<figure data-img="sb-survol-source" id="source"><img src="'.$source['url'].'" alt="sb-survol-source" >';
 					$return_string .= '<figcaption>'.$legende.'</figcaption></figure>';
 				endif;
 				// parcours du repeater qui contient les diapositives 
@@ -141,7 +141,7 @@ function sb_plugin_init(){
 						$image = get_sub_field($_img);
 						$content = get_sub_field($_content);
 						$link = get_sub_field($_link);
-						$return_string .= '<figure class="slide hidden" data-img="'.$image['title'].'">';					
+						$return_string .= '<figure class="slide hidden-content" data-img="'.$image['title'].'">';					
 						$return_string .= '<img src="'.$image['url'].'" alt="'.$image['alt'].'" /><figcaption>';
 
 						if( $link ):

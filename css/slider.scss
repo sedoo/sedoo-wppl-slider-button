@@ -42,7 +42,7 @@ $slider-bgcolor: #222;
 	flex-direction: column;
 }
 
-.hidden {
+.hidden-content {
 	display: none;
 }
 
@@ -79,7 +79,7 @@ section.survol {
 				max-height: calc(#{$sectionHeight} - #{$navHeight}*4);
 			}
 
-		&[data-img="source"] {
+		&[data-img="sb-survol-source"] {
 			color: $aside-bgcolor;
 
 			figcaption {
