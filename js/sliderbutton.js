@@ -32,7 +32,7 @@
 					    		return arr;
 						    }
 						};
-						xmlhttp.open("GET", '../wp-json/wp/v2/slider?order=asc', true);
+						xmlhttp.open("GET", '../wp-json/wp/v2/slider?per_page=100', true);
 						xmlhttp.send();
 					} /** --- Fin Fonction getData */
 
