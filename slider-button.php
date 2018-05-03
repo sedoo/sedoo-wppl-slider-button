@@ -3,7 +3,7 @@
 * Plugin Name: Slider Button
 * Description: Plugin permettant l'ajout d'un slider dans le contenu d'un post ou d'une page via un shortcode
 * Author: Esteban
-* Version: 1.1.2
+* Version: 1.1.3
 * GitHub Plugin URI: sedoo/sedoo-wppl-slider-button
 * GitHub Branch:     master
 */
