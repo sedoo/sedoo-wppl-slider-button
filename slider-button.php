@@ -3,7 +3,7 @@
  * Plugin Name: Slider Button
  * Description: Plugin permettant l'ajout d'un slider dans le contenu d'un post ou d'une page via un shortcode
  * Author: Esteban
- * Version: 1.1.4
+ * Version: 1.1.5
  * GitHub Plugin URI: sedoo/sedoo-wppl-slider-button
  * GitHub Branch:     master
  */
@@ -88,8 +88,10 @@ function sb_plugin_init() {
         $choix = get_field($choice, $id);
       }
 
-      /* Parcours de tous les Posts de type $postType et récupération des IDs */
-      $args = array('post_type' => $postType, 'fields' => 'ids');
+      /* Parcours de tous les Posts de type $postType et récupération des IDs 
+      ATTENTION au "posts_per_page" à mettre à "-1" afin de ne pas limiter la requete (10 par défaut...)
+      */
+      $args = array('post_type' => $postType, 'fields' => 'ids', 'posts_per_page' => -1);
 
       $loop = new WP_Query($args);
       $arr = array();
@@ -143,18 +145,23 @@ function sb_plugin_init() {
             $content = get_sub_field($_content);
             $link = get_sub_field($_link);
             $return_string .= '<figure class="slide hidden-content" data-img="' . $image['title'] . '">';
-            $return_string .= '<img src="' . $image['url'] . '" alt="' . $image['alt'] . '" /><figcaption>';
+            $return_string .= '<img src="' . $image['url'] . '" alt="' . $image['alt'] . '" />';
+            // Condition si pas de legende
+            if (($link)||($content)){
+              $return_string .= '<figcaption>';
+              if ($link):
+                $return_string .= '<a href="' . $link . '">';
+              endif;
+              if ($content) {
+                $return_string .= $content;
+              }
 
-            if ($link):
-              $return_string .= '<a href="' . $link . '">';
-            endif;
-
-            $return_string .= $content;
-
-            if ($link):
-              $return_string .= '</a>';
-            endif;
-            $return_string .= '</figcaption></figure>';
+              if ($link):
+                $return_string .= '</a>';
+              endif;
+              $return_string .= '</figcaption>';
+            }
+            $return_string .= '</figure>';
 
           endwhile;
           wp_reset_postdata();
@@ -361,7 +368,7 @@ function sb_plugin_init() {
      * Render meta box content
      */
     function sb_metabox_callback($post) {
-      echo '<strong><p>[slider id="' . $post->ID . '"]</p></strong>';
+      echo '<p>[slider id="' . $post->ID . '"]</p>';
     }
 
     /**
