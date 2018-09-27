@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Slider Button
  * Description: Plugin permettant l'ajout d'un slider dans le contenu d'un post ou d'une page via un shortcode
- * Author: Esteban
+ * Author: Esteban Mercier / Pierre Vert - SEDOO (Service de données OMP)
  * Version: 1.1.5
  * GitHub Plugin URI: sedoo/sedoo-wppl-slider-button
  * GitHub Branch:     master
@@ -112,16 +112,27 @@ function sb_plugin_init() {
         // sinon, le slider existe et on structure son affichage
         $return_string .= '<h2>' . $title . '</h2>';
         // $choix permet de différencier les styles entre "slider" et "survol"
-        $return_string .= '<section class="' . $choix . '"><nav>';
+        $return_string .= '<section class="' . $choix . '">';
         // parcours du repeater qui contient les diapositives
         // pour afficher les liens qui les contrôlent
         if (have_rows($repeater, $id)):
+          $i=0;
           while (have_rows($repeater, $id)): the_row();
             $image = get_sub_field($_img);
             $titre = get_sub_field($_title);
             $link = get_sub_field($_link);
-            $return_string .= '<a href="#" data-img="' . $image['title'] . '">' . $titre . '</a>';
+            if ($titre) {
+              // Condition si presence de nav
+              if ($i==0) {
+                $return_string .= '<nav>';
+              }
+              $return_string .= '<a href="#" data-img="' . $image['title'] . '">' . $titre . '</a>';
+            }
+            $i++;
           endwhile;
+          if ($i > 0) {
+            $return_string .= '</nav>';
+          }
           wp_reset_postdata();
         else:
           $return_string .= 'pas de champ Repeater ';
@@ -146,7 +157,7 @@ function sb_plugin_init() {
             $link = get_sub_field($_link);
             $return_string .= '<figure class="slide hidden-content" data-img="' . $image['title'] . '">';
             $return_string .= '<img src="' . $image['url'] . '" alt="' . $image['alt'] . '" />';
-            // Condition si pas de legende
+            // Condition si présence de legende
             if (($link)||($content)){
               $return_string .= '<figcaption>';
               if ($link):
@@ -317,11 +328,6 @@ function sb_plugin_init() {
 				section.survol .slides,
 				section.slider .slides {
 					background-color: <?php echo get_option("slider_bg_color"); ?>;
-				}
-				section.slider nav a:hover,
-				section.survol nav a:hover {
-					color: <?php echo get_option("slider_bg_color"); ?>;
-					border-top-color: <?php echo get_option("slider_bg_color"); ?>;
 				}
 
 			</style>
